@@ -32,6 +32,12 @@ IF OBJECT_ID ('VENDEDOR') IS NULL
 	id_producto int,
 	cantidad int
 	);
+	IF OBJECT_ID ('devoluciones') IS NULL
+	create table devoluciones	(
+	id_devoluciones int not null primary key,
+	id_entregas int,
+	fecha_devolucion datetime
+	);
 ALTER TABLE CLIENTE 
 	ADD FOREIGN KEY (ID_PLAZA) references PLAZA (ID_PLAZA)
 
