@@ -1,24 +1,29 @@
 
+IF DB_ID('imporfrut19_21') IS NULL
+	CREATE DATABASE imporfrut19_21
 USE imporfrut19_21;
 
-CREATE TABLE CLIENTE (
-ID_CLIENTE int primary key not null,
-NOMBRE nvarchar,
-TELEFONO int,
-EMAIL nvarchar(200),
-TIPO_FACTURACION nvarchar(200),
-ID_PLAZA int
-);
-CREATE TABLE PLAZA (
-ID_PLAZA int primary key not null,
-ID_CLIENTE int,
-ID_VENDEDOR int
-);
-CREATE TABLE VENDEDOR (
-ID_VENDEDOR int primary key not null,
-NOMBRE nvarchar(200), 
-ID_PLAZA int 
-);
+IF OBJECT_ID ('CLIENTE') IS NULL 
+	CREATE TABLE CLIENTE (
+	ID_CLIENTE int primary key not null,
+	NOMBRE nvarchar,
+	TELEFONO int,
+	EMAIL nvarchar(200),
+	TIPO_FACTURACION nvarchar(200),
+	ID_PLAZA int
+	);
+IF OBJECT_ID ('PLAZA') IS NULL 
+	CREATE TABLE PLAZA (
+	ID_PLAZA int primary key not null,
+	ID_CLIENTE int,
+	ID_VENDEDOR int
+	);
+IF OBJECT_ID ('VENDEDOR') IS NULL 
+	CREATE TABLE VENDEDOR (
+	ID_VENDEDOR int primary key not null,
+	NOMBRE nvarchar(200), 
+	ID_PLAZA int 
+	);
 
 ALTER TABLE CLIENTE 
 	ADD FOREIGN KEY (ID_PLAZA) references PLAZA (ID_PLAZA)
