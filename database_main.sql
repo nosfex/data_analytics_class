@@ -24,7 +24,14 @@ IF OBJECT_ID ('VENDEDOR') IS NULL
 	NOMBRE nvarchar(200), 
 	ID_PLAZA int 
 	);
-
+	IF OBJECT_ID ('entregas') IS NULL 
+	create table entregas (
+	id_entregas int not null primary key,
+	id_pedido int,
+	fecha_entrega datetime,
+	id_producto int,
+	cantidad int
+	);
 ALTER TABLE CLIENTE 
 	ADD FOREIGN KEY (ID_PLAZA) references PLAZA (ID_PLAZA)
 
