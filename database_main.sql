@@ -5,7 +5,7 @@ USE imporfrut19_21;
 
 IF OBJECT_ID ('CLIENTE') IS NULL 
 	CREATE TABLE CLIENTE (
-	ID_CLIENTE nvarchar(200) primary key not null,
+	ID_CLIENTE int primary key not null,
 	NOMBRE nvarchar(200),
 	TELEFONO int,
 	EMAIL nvarchar(200),
@@ -15,7 +15,7 @@ IF OBJECT_ID ('CLIENTE') IS NULL
 IF OBJECT_ID ('PLAZA') IS NULL 
 	CREATE TABLE PLAZA (
 	ID_PLAZA int primary key not null,
-	ID_CLIENTE nvarchar(200),
+	ID_CLIENTE int not null,
 	ID_VENDEDOR int
 	);
 IF OBJECT_ID ('VENDEDOR') IS NULL 
@@ -49,3 +49,28 @@ IF OBJECT_ID ('VENDEDOR') IS NULL
 
 --ALTER TABLE PLAZA
 	--ADD FOREIGN KEY (ID_VENDEDOR) references VENDEDOR (ID_VENDEDOR)
+	
+	
+	IF OBJECT_ID ('PRODUCTO') IS NULL
+	create table PRODUCTO (
+	ID_PRODUCTO int primary key not null ,
+	NOMBRE nvarchar(200) not null,
+	PRESENTACION nvarchar (200)not null,
+	TIPO_PRODUCTO nvarchar(200)not null,
+	Stock int
+	);
+	
+	
+	
+	IF OBJECT_ID ('PEDIDO') IS NULL
+	create table PEDIDO (
+	ID_PEDIDO int primary key not null,
+	ID_CLIENTE int not null,    --FK
+	ID_VENDEDOR int not null, --FK
+	ID_PRODUCTO int not null, --FK
+	FECHA	datetime not null,
+	DATOS_ENTREGA nvarchar(200) not null,
+	CANTIDAD nvarchar(200) not null
+	);
+
+	
