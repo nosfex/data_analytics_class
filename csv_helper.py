@@ -12,6 +12,8 @@ class ClientParser:
         self.clients = []
         self.names = []
         self.ids = []
+        self.operation = []
+        self.vendor = []
 
     def process_client_list(self, csvhelper):
         for row in csvhelper.reader:
@@ -29,7 +31,35 @@ class ClientParser:
                     self.clients.append(cl)
                     self.ids.append(row['IDAuxiliar'])
                     self.names.append(row['Auxiliar'])
+      
+    def process_operation(self, csvhelper):
+        self.seen = set()
+        for row in csvhelper.reader:
+            op = {'Folio':row['Folio'], 'Tipo':row['IDTipoDocumento'], 'Fecha':'10-10-2020', 'Producto':row['Producto'], 'Cantidad':row['Cantidad']}
+            if len(self.operation) <= 0:
+                self.operation.append(op)
+                self.seen.add(row['Folio'])
            
+            else:
+                val = row['Folio'] in self.seen
+                if val == False:
+                    self.operation.append(op)
+                    self.seen.add(row['Folio'])
+
+    def process_vendor(self, csvhelper):
+        self.seen = set()
+        for row in csvhelper.reader:
+            op = {'Vendedor':row['Vendedor'], 'Plaza':row['ReferenciaAdic1']}
+            if len(self.vendor) <= 0:
+                self.vendor.append(op)
+                self.seen.add(row['Vendedor'])
+           
+            else:
+                val = row['Vendedor'] in self.seen
+                if val == False:
+                    self.vendor.append(op)
+                    self.seen.add(row['Vendedor'])
+
 
 
 class Client:

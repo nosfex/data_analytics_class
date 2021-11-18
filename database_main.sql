@@ -22,15 +22,15 @@ IF OBJECT_ID ('VENDEDOR') IS NULL
 	CREATE TABLE VENDEDOR (
 	ID_VENDEDOR int primary key not null,
 	NOMBRE nvarchar(200), 
-	ID_PLAZA int 
+	ID_PLAZA nvarchar(200) 
 	);
 	IF OBJECT_ID ('entregas') IS NULL 
 	create table entregas (
-	id_entregas int not null primary key,
-	id_pedido int,
+	id_entregas nvarchar(200) not null primary key,
+	id_pedido nvarchar(200),
 	fecha_entrega datetime,
-	id_producto int,
-	cantidad int
+	id_producto nvarchar(300),
+	cantidad nvarchar(200)
 	);
 	IF OBJECT_ID ('devoluciones') IS NULL
 	create table devoluciones	(
