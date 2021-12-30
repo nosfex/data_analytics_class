@@ -6,20 +6,24 @@ class DBConnect:
     def __init__(self):
 
         self.conn = pymssql.connect(
-            host= r'DESKTOP-US1BF8U\SQLEXPRESS',    
+            host= r'coderhouse18890.database.windows.net',   
+            user='coder_admin',
+            password='etc_1234',
             database='imporfrut19_21'
         )
         self.cursor = self.conn.cursor()
     
-    def insert_client(self, query, client_list):
+    def insert_into_db(self, force_commit, query, client_list):
         self.cursor.execute(query, client_list)
+        if force_commit == True:
+            self.force_db_commit()
+        
+
+    def force_db_commit(self):
         self.conn.commit()
 
+
     #dupe function, need to manipulate data more to understand how every insert is going to differ
-    def insert_operation(self, query, operation_data):
-        self.cursor.execute(query, operation_data )
-        self.conn.commit()
-    
     def close(self):
         self.cursor.close()
         self.conn.close()
